@@ -64,4 +64,8 @@ public class DeveloperController {
         return new ResponseEntity<>(sortedList, HttpStatus.OK);
     }
 
+    @DeleteMapping("/deleteInGroup")
+    public ResponseEntity<String> deleteDeveloperInGroup(@RequestParam (required = false) List<Integer> id){
+        return new ResponseEntity("deleted", HttpStatus.OK);
+    }
 }
