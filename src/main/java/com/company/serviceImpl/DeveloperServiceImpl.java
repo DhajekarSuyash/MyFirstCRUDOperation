@@ -1,6 +1,7 @@
 package com.company.serviceImpl;
 
 import com.company.entity.Developer;
+import com.company.exception.DeveloperNotFoundException;
 import com.company.helper.DeveloperIdGenerator;
 import com.company.repository.DeveloperRepository;
 import com.company.service.DeveloperService;
@@ -12,6 +13,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class DeveloperServiceImpl implements DeveloperService {
+
+    public DeveloperServiceImpl() {
+        System.err.println("in service impl constructor");
+    }
 
     @Autowired
     private DeveloperRepository developerRepository;
@@ -35,10 +40,7 @@ public class DeveloperServiceImpl implements DeveloperService {
     @Override
     public Developer getDeveloperById(int id) {
         Developer developer = developerRepository.findById(id)
-                .orElseThrow(()
-                        ->
-                        new NullPointerException
-                                ("Developer with id not found " + id));
+                .orElseThrow(() -> new DeveloperNotFoundException("Developer with id not found : " +id));
         return developer;
     }
 
@@ -54,8 +56,8 @@ public class DeveloperServiceImpl implements DeveloperService {
         Developer developer = developerRepository.findById(id).orElseThrow(() -> new NullPointerException("No data found for update in db with id" + id));
         System.err.println("Old developer from db " + developer);
         System.err.println("Developer object with values to be updated " + newData);
-        developer.setfName(newData.getfName());
-        developer.setlName(newData.getlName());
+        developer.setFName(newData.getFName());
+        developer.setLName(newData.getLName());
         developer.setAge(newData.getAge());
         developer.setCity(newData.getCity());
         developer.setSalary(newData.getSalary());

@@ -2,6 +2,7 @@ package com.company.controller;
 
 import com.company.entity.Developer;
 import com.company.service.DeveloperService;
+import com.company.serviceImpl.DeveloperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/developer")
 public class DeveloperController {
+
+    public DeveloperController(){
+        System.err.println("In controller");
+    }
 
     @Autowired
     private DeveloperService developerService;
